@@ -1,0 +1,73 @@
+!!! 5
+html
+	head
+		base(href=settings.url + "/")
+		meta(charset="utf-8")
+		meta(name="description", content=settings.description)
+		meta(name="author", content=settings.author)
+		title=settings.title
+		if settings.mode == "development"
+			link(rel="stylesheet", href="stylesheets/bootstrap.css", media="screen")
+			link(rel="stylesheet", href="stylesheets/custom.css", media="screen")
+			script(type="text/javascript", src="javascripts/jquery.js")
+			script(type="text/javascript", src="javascripts/json2.js")
+			script(type="text/javascript", src="javascripts/underscore.js")
+			script(type="text/javascript", src="javascripts/backbone.js")
+			script(type="text/javascript", src="javascripts/backbone.localStorage.js")
+			script(type="text/javascript", src="javascripts/bootstrap.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.core.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.widget.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.mouse.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.sortable.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.slider.js")
+			script(type="text/javascript", src="javascripts/d3.v2.js")
+			script(type="text/javascript", src="javascripts/mt-stats.js")
+			script(type="text/javascript", src="javascripts/mt-stats.app.js")
+			script(type="text/javascript", src="javascripts/mt-stats.graph.js")
+			script(type="text/javascript", src="javascripts/mt-stats.graphs.js")
+			script(type="text/javascript", src="javascripts/mt-stats.data.js")
+		else
+			link(rel="stylesheet", href="stylesheets/bootstrap.min.css", media="screen")
+			link(rel="stylesheet", href="stylesheets/custom.css", media="screen")
+			script(type="text/javascript", src=settings.jQueryCdnUrl)
+			script(type="text/javascript", src="javascripts/backbone-bootstrap.min.js")
+			script(type="text/javascript", src="javascripts/jquery.ui.min.js")
+			script(type="text/javascript", src="javascripts/d3.v2.min.js")
+			script(type="text/javascript", src="javascripts/mt-stats.min.js")
+
+		script(type="text/javascript")
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', '#{settings.gaAccount}']);
+			_gaq.push(['_setDomainName', '#{settings.gaDomain}']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+	body
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container
+					a.brand(href="http://meloncholy.com") (mt) Stats
+					.nav-collapse
+						ul.nav
+							li
+								a#new-graph(href="#") New
+							li
+								.nav-label Range
+								#graph-range(href="#")
+								#graph-range-val
+
+						ul#sub-nav.nav.pull-right
+							li
+								a(href="https://github.com/meloncholy/mt-stats") GitHub
+							li
+								a(href="http://meloncholy.com/contact/") Contact
+							li
+								a(href="#", data-toggle="modal", data-target="#help-modal") Help
+
+		.container
+			!= body

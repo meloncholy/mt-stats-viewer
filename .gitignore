@@ -1,0 +1,29 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.exe
+
+pids
+logs
+results
+
+npm-debug.log
+
+node_modules
+Stuff
+
+app.json
+app josie.json
+app katie.json
+
+join.js
+
+*.join.js
+
+*.sublime-project
+*.sublime-workspace

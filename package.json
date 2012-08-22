@@ -1,0 +1,19 @@
+{
+  "name": "mt-stats-viewer",
+  "description": "Visualise your MediaTemple stats with some gorgeous D3 graphs.",
+  "version": "0.0.1",
+  "author": "Andrew Weeks <andrew@meloncholy.com>",
+  "dependencies": {
+    "mt-stats": ">= 0.0.1",
+    "express": ">= 2.5.x",
+    "jade": ">= 0.25.0",
+    "konphyg": ">= 1.0.5",
+    "less": ">= 1.3.0"
+  },
+  "keywords": ["d3", "graphs", "stats", "statistics", "mediatemple", "mt"],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meloncholy/mt-stats-viewer.git"
+  },
+  "main": "index"
+}

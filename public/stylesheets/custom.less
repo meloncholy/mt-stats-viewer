@@ -1,0 +1,384 @@
+@fontcolour: #666;
+@linecolour: #888;
+@fontface: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, "sans-serif";
+@titlefontface: "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial, "sans-serif";
+@fontsize: 14px;
+@titlefontsize: 21px;
+@smallfontsize: 12px;
+@graphwidth: 940px;
+@graphheight: 150px;
+@graphheightnopad: 130px;
+@bordercolour: #0072c6;
+@navcolour: rgba(0,114,198,.75);
+@navhovercolour: rgba(0,100,173,.5);
+@navtextcolour: #fff;
+@slidercolour: @navhovercolour;
+@sliderlight: #fff;
+// @sliderdark: #005999;
+
+@font-face { font-family: "Segoe UI"; font-weight: normal; src: url("../fonts/segoe-ui/segoeui.ttf"); }
+@font-face { font-family: "Segoe UI Light"; font-weight: lighter; src: url("../fonts/segoe-ui/segoeuil.ttf"); }
+
+body {
+	color: @fontcolour;
+	font-family: @fontface;
+	font-size: @fontsize;
+}
+
+#body {
+	margin-top: 80px;
+}
+
+h2, h3 {
+	color: @fontcolour;
+	font: normal @titlefontsize @titlefontface;
+}
+
+
+// Graphs
+
+#graphs { 
+	position: relative;
+	margin: 0;
+}
+
+#graphs > li {
+	height: @graphheight;
+	list-style-type: none;
+	position: relative;
+	width: @graphwidth;
+}
+
+.graph-container {
+	background: #fff url("../images/spinner.gif") no-repeat 50% 40%;
+
+	&:hover, &.open {
+		.btn-toolbar, .axis {
+			opacity: 1;
+		}
+
+		.graph-title, .graph-val {
+			opacity: 0;
+		}
+	}
+}
+
+// SVG element is expanded by d3 beyond crop box, so crop here too to remove scrollbars
+.graph-frame {
+	height: @graphheight;
+	overflow: hidden;
+	position: relative;
+	width: @graphwidth;
+}
+
+.graph-placeholder {
+	border: solid 5px #eee;
+	box-sizing: border-box;
+}
+
+.graph {
+	background-color: #fff;
+	color: @fontcolour;
+	font-size: 10px;
+	height: @graphheightnopad;
+	padding: 0 0 20px 0;
+	width: @graphwidth;
+}
+
+.graph-val {
+	color: @fontcolour;
+	text-anchor: end;
+	transition: 500ms opacity;
+	-moz-transition: 500ms opacity;
+	-webkit-transition: 500ms opacity;
+}
+
+// Chrome does not like overlaying floated & SVG elements, so position absolute. 
+.graph-title {
+	left: 0;
+	// margin-left: 9px;
+	position: absolute;
+	transition: 500ms opacity;
+	-moz-transition: 500ms opacity;
+	-webkit-transition: 500ms opacity;
+	top: 0;
+	z-index: 1;
+}
+
+.line {
+	fill: none;
+	stroke-width: 2px;
+}
+
+.area {
+	opacity: 0;
+}
+
+.dot {
+	stroke-width: 2px;
+	display: none;
+}
+
+.graph-overlay {
+	background: rgba(255,255,255,.75) url("../images/spinner.gif") no-repeat 50% 40%;
+	bottom: 0;
+	display: none;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: 250ms opacity;
+	-moz-transition: 250ms opacity;
+	-webkit-transition: 250ms opacity;
+	z-index: 2;
+
+	&.active {
+		display: block;
+		opacity: 1;
+		transition: 500ms opacity;
+		-moz-transition: 500ms opacity;
+		-webkit-transition: 500ms opacity;
+	}
+}
+
+.graph-info {
+	background-color: rgba(255,255,255,.75);
+	border: 2px solid @bordercolour;
+	cursor: default;
+	display: none;
+	font-size: @smallfontsize;
+	padding: 5px;
+	position: absolute;
+	text-align: center;
+
+	.property {
+		font-weight: bold;
+	}
+}
+
+.btn-toolbar, .axis {
+	margin-top: 0;
+	margin-bottom: 0;
+	opacity: 0;
+	transition: 500ms opacity;
+	-moz-transition: 500ms opacity;
+	-webkit-transition: 500ms opacity;
+
+	// Chrome does not like putting floats over SVG elements, so position absolutely.
+	&.pull-right {
+		// margin-right: 9px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 1;
+	}
+
+	path, line {
+		fill: none;
+		stroke: @linecolour;
+		shape-rendering: crispEdges;
+	}
+}
+
+
+// Buttons
+
+.btn {
+	background-color: rgba(255,255,255,.7);
+	background-image: none;
+	border-radius: 0 !important;
+	box-shadow: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	filter: none;
+	color: @fontcolour;
+	border: 2px solid @linecolour;
+	text-shadow: none;
+
+	&.btn-danger {
+		color: #fff;
+		background-color: rgba(230,0,0,.6);
+		border-color: rgba(200,0,0,1);
+
+		&:hover {
+			background-color: rgba(230,0,0,.9);
+			border-color: rgba(180,0,0,1);
+			color: #fff;
+		}
+	}
+
+	.caret {
+		margin-left: 2px;
+		opacity: .4;
+	}
+
+	&.active, &:hover {
+		background-color: rgba(243,243,243,1);
+		border-color: #555;
+		box-shadow: none;
+		color: #444;
+
+		.caret {
+			opacity: .7;
+		}
+	}
+}
+
+// This should be part of above somehow.
+.btn-group.open .dropdown-toggle {
+	background-color: rgba(243,243,243,1);
+	border-color: #555;
+	box-shadow: none;
+	color: #444;
+}
+
+.btn-group > .btn {
+	border-width: 2px 1px;
+
+	&:first-child {
+		border-left-width: 2px;
+	}
+
+	&:last-child {
+		border-right-width: 2px;
+	}
+}
+
+.dropdown-menu {
+	border: 2px solid @linecolour;
+	border-radius: 0;
+	box-shadow: none;
+
+	a {
+		color: @fontcolour;
+	}
+
+	li > a:hover, .active > a, .active > a:hover {
+		background-color: @navcolour;
+	}
+}
+
+
+// Nav
+
+.navbar-inner {
+	background-color: @navcolour;
+	background-image: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.navbar .nav > li > a {
+	color: @navtextcolour;
+	text-shadow: none;
+
+	&:hover {
+		background-color: @navhovercolour;
+	}
+}
+
+#sub-nav {
+	font-size: @smallfontsize;
+	vertical-align: middle;
+}
+
+.navbar #sub-nav.nav > li > a {
+	padding-top: 10px;
+}
+
+.navbar .brand {
+	color: @navtextcolour;
+	font: normal @titlefontsize @titlefontface;
+	padding: 2px 20px 8px;
+}
+
+.navbar .nav-label {
+	color: @navtextcolour;
+	display: inline-block;
+	line-height: 19px;
+	padding: 9px 10px 11px;
+}
+
+#new-graph {
+	background: transparent url("../images/new.png") no-repeat 10px 50%;
+	padding-left: 40px;
+
+	&:hover {
+		background-color: @navhovercolour;
+	}
+}
+
+#graph-range {
+	background: @slidercolour;
+	border: 2px solid @sliderlight;
+	cursor: pointer;
+	display: inline-block;
+	height: 12px;
+	margin: 12px 10px 0 0;
+	position: relative;
+	vertical-align: top;
+	width: 100px;
+
+	.ui-slider-handle {
+		background-color: @sliderlight;
+		border: 2px solid @sliderlight;
+		height: 6px;
+		margin: -4px -2px;
+		outline: none;
+		padding: 5px;
+		position: absolute;
+	}
+}
+
+#graph-range-val {
+	color: @navtextcolour;
+	display: inline-block;
+	font-size: @smallfontsize;
+	opacity: 0;
+	transition: 1s opacity;
+	-moz-transition: 1s opacity;
+	-webkit-transition: 1s opacity;
+	transition-delay: 500ms;
+	-moz-transition-delay: 500ms;
+	-webkit-transition-delay: 500ms;
+}
+
+#graph-range:hover + #graph-range-val, #graph-range-val.active {
+	opacity: 1;
+	transition: 250ms opacity;
+	-moz-transition: 250ms opacity;
+	-webkit-transition: 250ms opacity;
+	transition-delay: 250ms;
+	-moz-transition-delay: 250ms;
+	-webkit-transition-delay: 250ms;
+}
+
+
+// Dialog / modal
+
+.modal {
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.modal-header {
+	border-bottom-color: #ddd;
+}
+
+.modal-footer {
+	border-radius: 0;
+	border-top-color: #ccc;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;	
+	-webkit-box-shadow: none;	
+}
