@@ -1,3 +1,18 @@
+/*!
+* (mt) Stats Viewer
+*
+* Visualise your MediaTemple stats with some gorgeous D3 graphs.
+*
+* @package mt-stats
+* @subpackage app
+*
+* App container. Handles navbar.
+*
+* Copyright (c) 2012 Andrew Weeks http://meloncholy.com
+* Licensed under the MIT licence. See http://meloncholy.com/licence
+* Version 0.0.1
+*/
+
 /*global _: true, Backbone: true, d3: true, mt: true */
 
 $(function () {
@@ -7,7 +22,6 @@ $(function () {
 		el: $(document),
 		graphs: undefined,
 		$rangeVal: $("#graph-range-val"),
-		rangeTracker: undefined,
 		rangeValTracker: undefined,
 
 		events: {
@@ -61,29 +75,3 @@ $(function () {
 		}
 	});
 });
-
-				// .fadeIn(250, function () {
-				// 	if (that.rangeTracker) {
-				// 		clearTimeout(that.rangeTracker);
-				// 	}
-				// 	that.rangeTracker = setTimeout(function () {
-				// 		$(".graph-overlay").fadeIn(250);
-				// 		mt.stats.load(mt.stats.data[mt.stats.end].time - ms, mt.stats.data[0].time, that._refreshedGraphs);
-				// 		if (that.rangeValTracker) clearTimeout(that.rangeValTracker);
-
-				// 		that.rangeValTracker = setTimeout(function () {
-				// 			// that.$rangeVal.delay(250).fadeOut(500);
-				// 			that.$rangeVal.removeClass("active");
-				// 		}, 2000);
-
-				// 		that.$rangeVal.addClass("active");
-				// 	}, 1000);
-				// });
-
-		// showRangeVal: function () {
-		// 	// this.$rangeVal.stop(true).delay(250).fadeIn(250);
-		// },
-
-		// hideRangeVal: function () {
-		// 	// if (!this.rangeValTracker) this.$rangeVal.delay(500).fadeOut(500);
-		// }

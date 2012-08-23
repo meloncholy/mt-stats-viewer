@@ -1,3 +1,18 @@
+/*!
+* (mt) Stats Viewer
+*
+* Visualise your MediaTemple stats with some gorgeous D3 graphs.
+*
+* @package mt-stats
+* @subpackage graphs
+*
+* Graphs collection model and view.
+*
+* Copyright (c) 2012 Andrew Weeks http://meloncholy.com
+* Licensed under the MIT licence. See http://meloncholy.com/licence
+* Version 0.0.1
+*/
+
 /*global _: true, Backbone: true, d3: true, mt: true, Store: true */
 
 $(function () {
