@@ -22,7 +22,7 @@ var routes = {};
 routes.site = require("./routes/site");
 
 var app = module.exports = express.createServer();
-
+var app = module.exports
 app.configure(function () {
 	app.set("env", global.mtSettings.mode);
 	app.set("views", __dirname + "/views");
